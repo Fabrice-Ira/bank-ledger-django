@@ -1,0 +1,11 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Delete Account{% endblock %}
+{% block content %}
+<h1>Delete Account</h1>
+<p>Are you sure you want to delete account <strong>{{ account.account_number }}</strong>? This cannot be undone.</p>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Yes, Delete</button>
+    <a class="btn" href="{% url 'account_list' %}">Cancel</a>
+</form>
+{% endblock %}

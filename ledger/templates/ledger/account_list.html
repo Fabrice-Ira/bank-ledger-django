@@ -1,0 +1,29 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Accounts{% endblock %}
+{% block content %}
+<h1>Accounts</h1>
+<div class="search-bar">
+    <form method="get" style="display:flex; gap:8px; width:100%;">
+        <input type="text" name="q" placeholder="Search by account number or customer name..." value="{{ query }}">
+        <button class="btn" type="submit">Search</button>
+    </form>
+    <a class="btn" href="{% url 'account_create' %}">+ Add Account</a>
+</div>
+<table>
+    <tr><th>Account #</th><th>Customer</th><th>Type</th><th>Balance</th><th>Actions</th></tr>
+    {% for a in accounts %}
+    <tr>
+        <td><a href="{% url 'account_detail' a.pk %}">{{ a.account_number }}</a></td>
+        <td>{{ a.customer.full_name }}</td>
+        <td>{{ a.account_type }}</td>
+        <td>{{ a.balance }}</td>
+        <td>
+            <a class="btn" href="{% url 'account_detail' a.pk %}">View</a>
+            <a class="btn btn-danger" href="{% url 'account_delete' a.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">No accounts yet.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

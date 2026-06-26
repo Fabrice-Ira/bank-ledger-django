@@ -1,0 +1,12 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Account Form{% endblock %}
+{% block content %}
+<h1>Add Account</h1>
+<form method="post" class="styled-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button class="btn" type="submit">Save</button>
+    <a class="btn" href="{% url 'account_list' %}">Cancel</a>
+</form>
+{% endblock %}

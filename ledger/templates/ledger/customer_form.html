@@ -1,0 +1,12 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Customer Form{% endblock %}
+{% block content %}
+<h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Customer</h1>
+<form method="post" enctype="multipart/form-data" class="styled-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button class="btn" type="submit">Save</button>
+    <a class="btn" href="{% url 'customer_list' %}">Cancel</a>
+</form>
+{% endblock %}

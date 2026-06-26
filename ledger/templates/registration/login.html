@@ -1,0 +1,11 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<h1>Login</h1>
+<form method="post" class="styled-form" style="max-width:400px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button class="btn" type="submit">Log In</button>
+</form>
+{% endblock %}

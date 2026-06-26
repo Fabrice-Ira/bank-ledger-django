@@ -1,0 +1,16 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Deposit / Withdraw{% endblock %}
+{% block content %}
+<h1>New Transaction — Account {{ account.account_number }}</h1>
+<p class="balance">Current Balance: {{ account.balance }}</p>
+<form method="post" class="styled-form">
+    {% csrf_token %}
+    {{ form.account.as_hidden }}
+    <label>Type</label>{{ form.transaction_type }}
+    <label>Amount</label>{{ form.amount }}
+    <label>Description</label>{{ form.description }}
+    <br><br>
+    <button class="btn" type="submit">Submit</button>
+    <a class="btn" href="{% url 'account_detail' account.pk %}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+<h1>Customers</h1>
+<div class="search-bar">
+    <form method="get" style="display:flex; gap:8px; width:100%;">
+        <input type="text" name="q" placeholder="Search by name or national ID..." value="{{ query }}">
+        <button class="btn" type="submit">Search</button>
+    </form>
+    <a class="btn" href="{% url 'customer_create' %}">+ Add Customer</a>
+</div>
+<table>
+    <tr><th>Full Name</th><th>National ID</th><th>Phone</th><th>Date Joined</th><th>Actions</th></tr>
+    {% for c in customers %}
+    <tr>
+        <td>{{ c.full_name }}</td>
+        <td>{{ c.national_id }}</td>
+        <td>{{ c.phone_number }}</td>
+        <td>{{ c.date_joined|date:"Y-m-d" }}</td>
+        <td>
+            <a class="btn" href="{% url 'customer_update' c.pk %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'customer_delete' c.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">No customers yet.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}
