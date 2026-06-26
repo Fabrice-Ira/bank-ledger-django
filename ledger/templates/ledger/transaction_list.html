@@ -1,0 +1,45 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Transactions{% endblock %}
+{% block content %}
+<h1>Transactions</h1>
+
+<form method="get" style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; align-items:flex-end;">
+    <div>
+        <label style="display:block; font-size:13px; margin-bottom:4px;">Account Number</label>
+        <input type="text" name="account_number" placeholder="e.g. ACC001" value="{{ account_number }}"
+               style="padding:8px; border:1px solid #ccc; border-radius:4px;">
+    </div>
+    <div>
+        <label style="display:block; font-size:13px; margin-bottom:4px;">From Date</label>
+        <input type="date" name="date_from" value="{{ date_from }}"
+               style="padding:8px; border:1px solid #ccc; border-radius:4px;">
+    </div>
+    <div>
+        <label style="display:block; font-size:13px; margin-bottom:4px;">To Date</label>
+        <input type="date" name="date_to" value="{{ date_to }}"
+               style="padding:8px; border:1px solid #ccc; border-radius:4px;">
+    </div>
+    <button class="btn" type="submit">Search</button>
+    <a class="btn" style="background:#888;" href="{% url 'transaction_list' %}">Clear</a>
+</form>
+
+<table>
+    <tr><th>Date</th><th>Account</th><th>Customer</th><th>Type</th><th>Amount</th><th>Description</th><th>Actions</th></tr>
+    {% for t in transactions %}
+    <tr>
+        <td>{{ t.timestamp|date:"Y-m-d H:i" }}</td>
+        <td>{{ t.account.account_number }}</td>
+        <td>{{ t.account.customer.full_name }}</td>
+        <td>{{ t.transaction_type }}</td>
+        <td>{{ t.amount }}</td>
+        <td>{{ t.description }}</td>
+        <td>
+            <a class="btn" href="{% url 'transaction_update' t.pk %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'transaction_delete' t.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">No transactions found.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

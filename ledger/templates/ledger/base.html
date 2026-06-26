@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Bank Ledger{% endblock %}</title>
+    <title>{% block title %}I&F Bank Ledger{% endblock %}</title>>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #1a1a2e; }
@@ -34,18 +34,20 @@
 </head>
 <body>
     <nav>
-        <div>
-            <a href="{% url 'customer_list' %}">Customers</a>
-            <a href="{% url 'account_list' %}">Accounts</a>
-        </div>
-        <div>
-            {% if user.is_authenticated %}
-                Welcome, {{ user.username }} | <a href="{% url 'logout' %}">Logout</a>
-            {% else %}
-                <a href="{% url 'login' %}">Login</a>
-            {% endif %}
-        </div>
-    </nav>
+    <div style="display:flex; align-items:center; gap:24px;">
+        <a href="{% url 'home' %}" style="font-size:20px; font-weight:700; letter-spacing:0.5px;">🏦 I&F Bank Ledger</a>
+        <a href="{% url 'customer_list' %}">Customers</a>
+        <a href="{% url 'account_list' %}">Accounts</a>
+        <a href="{% url 'transaction_list' %}">Transactions</a>
+    </div>
+    <div>
+        {% if user.is_authenticated %}
+            Welcome, {{ user.username }} | <a href="{% url 'about' %}">About</a> | <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'about' %}">About</a> | <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+</nav>
     <div class="container">
         {% if messages %}
         <ul class="messages">
@@ -56,5 +58,10 @@
         {% endif %}
         {% block content %}{% endblock %}
     </div>
+    <footer style="margin-top:40px; padding:20px 32px; background:#1A1A2E; color:#cccccc; text-align:center; font-size:13px;">
+        <strong style="color:white;">I&amp;F Bank</strong> &mdash; All Rights Reserved<br>
+        <em>"Your Trust, Our Foundation"</em><br>
+        Kigali, Rwanda
+    </footer>
 </body>
 </html>

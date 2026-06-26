@@ -1,0 +1,25 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1>Check Account Balance</h1>
+<p style="color:#666; margin-bottom:16px;">Enter an account number to look up its current balance.</p>
+
+<form method="get" style="display:flex; gap:8px; max-width:500px;">
+    <input type="text" name="account_number" placeholder="e.g. ACC001" value="{{ account_number }}"
+           style="flex:1; padding:10px; border:1px solid #ccc; border-radius:4px;">
+    <button class="btn" type="submit">Check Balance</button>
+</form>
+
+{% if error %}
+<p style="margin-top:20px; color:#C0392B; font-weight:500;">{{ error }}</p>
+{% endif %}
+
+{% if account %}
+<div style="margin-top:24px; background:white; padding:24px; border-radius:6px; box-shadow:0 1px 3px rgba(0,0,0,0.1); max-width:500px;">
+    <p>Account Number: <strong>{{ account.account_number }}</strong></p>
+    <p>Customer: <strong>{{ account.customer.full_name }}</strong></p>
+    <p>Type: {{ account.account_type }}</p>
+    <p class="balance" style="margin-top:10px;">Balance: {{ account.balance }}</p>
+</div>
+{% endif %}
+{% endblock %}

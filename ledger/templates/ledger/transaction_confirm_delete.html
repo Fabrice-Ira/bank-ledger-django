@@ -1,0 +1,13 @@
+{% extends 'ledger/base.html' %}
+{% block title %}Delete Transaction{% endblock %}
+{% block content %}
+<h1>Delete Transaction</h1>
+<p>Delete this <strong>{{ transaction.transaction_type }}</strong> of <strong>{{ transaction.amount }}</strong>
+   on account <strong>{{ transaction.account.account_number }}</strong>?</p>
+<p style="color:#C0392B;">The account balance will be automatically corrected to reverse this transaction's effect.</p>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Yes, Delete</button>
+    <a class="btn" href="{% url 'transaction_list' %}">Cancel</a>
+</form>
+{% endblock %}

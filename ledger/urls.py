@@ -17,4 +17,10 @@ urlpatterns = [
 
     # Transactions (deposit/withdraw)
     path('accounts/<int:account_pk>/transact/', views.transaction_create, name='transaction_create'),
+    path('about/', views.about, name='about'),
+    path('transactions/', views.transaction_list, name='transaction_list'),
+    path('transactions/<int:pk>/edit/', views.transaction_update, name='transaction_update'),
+    path('transactions/<int:pk>/delete/', views.transaction_delete, name='transaction_delete'),
+    path('accounts/<int:pk>/edit/', views.account_update, name='account_update'),
+    path('api/accounts/<int:pk>/balance/', views.account_balance_api, name='account_balance_api'),
 ]

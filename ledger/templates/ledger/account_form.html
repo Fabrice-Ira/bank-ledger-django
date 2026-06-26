@@ -1,7 +1,7 @@
 {% extends 'ledger/base.html' %}
 {% block title %}Account Form{% endblock %}
 {% block content %}
-<h1>Add Account</h1>
+<h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Account</h1>
 <form method="post" class="styled-form">
     {% csrf_token %}
     {{ form.as_p }}

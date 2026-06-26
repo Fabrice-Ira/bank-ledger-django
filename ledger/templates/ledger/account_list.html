@@ -19,6 +19,7 @@
         <td>{{ a.balance }}</td>
         <td>
             <a class="btn" href="{% url 'account_detail' a.pk %}">View</a>
+            <a class="btn" href="{% url 'account_update' a.pk %}">Edit</a>
             <a class="btn btn-danger" href="{% url 'account_delete' a.pk %}">Delete</a>
         </td>
     </tr>
